@@ -6,7 +6,21 @@ from fastapi_app.service import classify_wood_image
 
 app = FastAPI()
 
-#
+@app.get("/test")
+def test():
+    response_data = {
+        "final_grade": "A",
+        "price": "233 LKR",
+        "grade_probability": {
+            "A": 0.6,
+            "B": 0.2,
+            "C": 0.1,
+            "D": 0.1
+        },
+        "description": "High-quality teak wood with minimal defects, suitable for premium furniture."
+    }
+    return JSONResponse(content=response_data)
+
 @app.post("/teak-wood-valuation")
 async def evaluate_teak_wood(file: UploadFile = File(...)):
     # Read image from uploaded file
