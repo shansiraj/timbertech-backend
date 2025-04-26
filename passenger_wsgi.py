@@ -1,1 +1,0 @@
-application = medisofy.wsgi.application
