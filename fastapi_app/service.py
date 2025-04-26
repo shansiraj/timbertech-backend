@@ -1,7 +1,6 @@
 from PIL import Image
-from modules.image_handler import resize_image_maintain_aspect_ratio, divide_image_into_patches
+from modules.image_handler import divide_image_into_patches
 from modules.model_handler import load_model
-from modules.image_handler import load_image, convert_to_displayable_image
 from modules.preprocessor import preprocessing
 from modules.teak_grader import get_grade_results, create_output_prob_json, get_accumulated_prob
 from modules.gen_ai_handler import get_image_analysis_v2
@@ -57,7 +56,6 @@ def classify_wood_image(image: Image.Image):
 
     description_text = get_image_analysis_v2(image)
 
-    # Fake classification logic - Replace with actual model prediction logic
     final_grade = final_grade_text
     price = str(total_price) + " " + get_currency()
     grade_probability = grade_probability_json
@@ -65,3 +63,5 @@ def classify_wood_image(image: Image.Image):
     
     # Simulating model prediction
     return final_grade, price, grade_probability, description
+
+

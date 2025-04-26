@@ -12,7 +12,8 @@ def convert_to_displayable_image(transformed_image):
     # Normalize the values to the [0, 1] range for display
     # Since the values might be in the [-1, 1] range (common for normalized tensors), 
     # scale them to [0, 1] for proper display
-    new_transformed_image = (new_transformed_image - new_transformed_image.min()) / (new_transformed_image.max() - new_transformed_image.min())
+    new_transformed_image = ((new_transformed_image - new_transformed_image.min()) / 
+                (new_transformed_image.max() - new_transformed_image.min()))
 
     # Convert to 8-bit format for display
     new_transformed_image = (new_transformed_image * 255).astype(np.uint8)
@@ -64,3 +65,5 @@ def divide_image_into_patches(image: Image.Image, patch_size: int):
             patches.append(Image.fromarray(patch))
 
     return patches
+
+    

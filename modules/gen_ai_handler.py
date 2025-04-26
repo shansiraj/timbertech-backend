@@ -85,3 +85,5 @@ def get_image_analysis_v2(image):
     title = "Image of Swan Teak Wood"
 
     return gpt_api(client,system_prompt,image,title)
+
+

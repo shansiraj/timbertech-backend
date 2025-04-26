@@ -21,3 +21,6 @@ def preprocessing(image):
     transformed_image = transformed_image.unsqueeze(0)
 
     return transformed_image
+
+
+

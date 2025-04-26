@@ -8,13 +8,10 @@ from modules.gen_ai_handler import get_image_analysis_v1
 import pandas as pd
 
 def main():
-
     # Set the page layout to wide
     st.set_page_config(page_title="TimberTech", layout="wide")
-
     # Sidebar
     with st.sidebar:
-        
         st.markdown(
             """
             <style>
@@ -46,7 +43,10 @@ def main():
         )
 
         meta_text = """
-                TimberTech is an AI-driven Sawn Teak Wood Grading System designed for the Sri Lankan wood industry. Using CNN-based deep learning, it accurately analyzes and grades sawn teak wood images, ensuring efficient and reliable quality assessment. It also optionally aids in pricing teak wood surfaces based on their grade.
+                TimberTech is an AI-driven Sawn Teak Wood Grading System designed for the Sri Lankan wood industry. 
+                Using CNN-based deep learning, it accurately analyzes and grades sawn teak wood images, 
+                ensuring efficient and reliable quality assessment. 
+                It also optionally aids in pricing teak wood surfaces based on their grade.
         """
                 
         st.sidebar.image("img/logo.png", clamp=True)
@@ -65,17 +65,11 @@ def main():
     if st.sidebar.button('Start Analysis',use_container_width=True):
 
         if uploaded_file:
-
             original_image = load_image(uploaded_file)
-
             img_path = f"tmp/temp_image.jpg"  # Temporary path to save image
             original_image.save(img_path)
-
             preprocessed_image = preprocessing(original_image)
-
             transformed_image = convert_to_displayable_image(preprocessed_image)
-
-
             grade, grade_text, probabilities_np = get_grade_results(model,preprocessed_image)
 
             # Create interpreted image
@@ -83,23 +77,17 @@ def main():
 
             # Create a DataFrame for grades and probabilities
             styled_df = create_output_prob_df(probabilities_np)
-
             probabilities_reversed = probabilities_np[::-1]
-            
-
             st.markdown(f"<h3><strong>Identified Grade : {grade_text}</strong></h3>", unsafe_allow_html=True)
 
             # Display components
             col1, col2,col3,col4 = st.columns([1,1,1,2])
-
             with col1:
                 st.write("Original Image")
                 st.image(original_image, use_column_width=False)
-
             with col2:
                 st.write("Transformed Image")
                 st.image(transformed_image, use_column_width=False)
-
             with col3:
                 st.write("Interpreted Image")
                 st.image(overlayed_image, caption="Grad-CAM Interpretation", use_column_width=False)
@@ -121,7 +109,6 @@ def main():
                     'Probability': probabilities_reversed
                 })
                 st.bar_chart(df.set_index('Grade')['Probability'])
-
             with col1:
                 # Display the Gen AI analysis
                 st.write("Gen AI Textual Analysis")
@@ -129,12 +116,8 @@ def main():
                     # image_analysis = get_image_analysis(img_path)
                     image_analysis = get_image_analysis_v1(original_image)
                 st.write(image_analysis)
-
-            
-
         else:
             st.error("Image is not loaded")
-
     with st.sidebar:
         st.markdown('<hr class="white-line">', unsafe_allow_html=True)
         st.markdown('<p class="center-text">Developed by D. Shan Siraj</p>', unsafe_allow_html=True)
